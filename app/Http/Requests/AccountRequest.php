@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CompanyRequest extends Request {
+class AccountRequest extends Request {
 
 /**
 	 * Determine if the user is authorized to make this request.
@@ -25,15 +25,17 @@ class CompanyRequest extends Request {
 
 		if($company){
 			return [
-				'company_name' 		=> 'required|max:255|unique:companies,name,'.$company->id,
+				'name' 				=> 'required|min:3|max:15|unique:accounts,name,'.$company->id,
 				'display_name' 		=> 'required',
+				'owner_name' 		=> 'required',
 				'username' 			=> 'required|min:3|max:255|unique:users,name,'.$company->user->id,
 				'password' 			=> 'required|confirmed|min:6',
 			];
 		}else{
 			return [
-				'company_name' 		=> 'required|max:255|unique:companies,name',
+				'name' 				=> 'required|min:3|max:15|unique:accounts,name',
 				'display_name' 		=> 'required',
+				'owner_name' 		=> 'required',
 				'username' 			=> 'required|min:3|max:255|unique:users,name',
 				'password' 			=> 'required|confirmed|min:6',
 			];

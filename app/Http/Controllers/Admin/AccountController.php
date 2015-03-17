@@ -1,14 +1,19 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Company;
+use App\Account;
 use App\User;
 use App\Http\Requests;
-use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\accountRequest;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller {
+class AccountController extends Controller {
+
+	public function __construct()
+	{
+		$this->middleware('admin');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -17,8 +22,8 @@ class CompanyController extends Controller {
 	 */
 	public function index()
 	{
-		$companies = Company::all();
-		return view('admin.company.index',compact('companies'));
+		$accounts = Account::all();
+		return view('admin.account.index',compact('accounts'));
 	}
 
 	/**
@@ -28,7 +33,7 @@ class CompanyController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.company.create');
+		return view('admin.account.create');
 	}
 
 	/**
@@ -36,26 +41,27 @@ class CompanyController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CompanyRequest $request)
+	public function store(AccountRequest $request)
 	{
 		$user 				= new User;
 		$user->role_id 		= 2;
-		$user->name 		= $request->get('display_name');
+		$user->name 		= $request->get('owner_name');
 		$user->username 	= $request->get('username');
 		$user->password 	= bcrypt($request->get('password'));
 		
 		if($user->save()){
 			
-			$company  = new Company([
-							'name' 			=> $request->get('company_name'),
+			$account  = new Account([
+							'name' 			=> $request->get('name'),
+							'display_name' 	=> $request->get('display_name'),
 							'description' 	=> $request->get('description')
 						]);
 
-			$user->company()->save($company);
-			return redirect('admin/company');
+			$user->account()->save($account);
+			return redirect('admin/account');
 
 		}else{
-			return redirect('admin/company/create')->withErrors(['company_name'=>'Faile to create a new user']);
+			return redirect('admin/account/create')->withErrors(['account_name'=>'Faile to create a new user']);
 		}
 	}
 
@@ -65,9 +71,9 @@ class CompanyController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($company)
+	public function show($account)
 	{
-		return view('admin.company.show');
+		return view('admin.account.show');
 	}
 
 	/**
@@ -76,9 +82,9 @@ class CompanyController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($company)
+	public function edit($account)
 	{
-		return view('admin.company.edit');
+		return view('admin.account.edit');
 	}
 
 	/**
@@ -87,7 +93,7 @@ class CompanyController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($company)
+	public function update($account)
 	{
 		//
 	}
@@ -98,7 +104,7 @@ class CompanyController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($company)
+	public function destroy($account)
 	{
 		//
 	}

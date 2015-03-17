@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompaniesTable extends Migration {
+class CreateAccountsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class CreateCompaniesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('companies', function(Blueprint $table)
+		Schema::create('accounts', function(Blueprint $table)
 		{
 		    $table->increments('id');
 		    $table->string('name')->unique();
+		    $table->string('display_name')->nullable();
 		    $table->string('description')->nullable();
 		    $table->string('logo')->nullable();
 		    $table->string('cover')->nullable();
@@ -23,7 +24,7 @@ class CreateCompaniesTable extends Migration {
 		    $table->string('twitter')->nullable();
 		    $table->integer('user_id')->length(10)->unsigned();
 		    $table->timestamps();
-		    $table->foreign('user_id')->references('id')->on('users');
+		    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 		});
 	}
 
@@ -34,7 +35,7 @@ class CreateCompaniesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('companies');
+		Schema::drop('accounts');
 	}
 
 }

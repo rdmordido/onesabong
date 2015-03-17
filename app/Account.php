@@ -2,10 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model{
+class Account extends Model{
 	
-	protected $table 	= 'companies';
-	protected $fillable = ['name','description'];
+	protected $table 	= 'accounts';
+	protected $fillable = ['name','display_name','description'];
 
 	public function owner(){
 		return $this->belongsTo('App\User');

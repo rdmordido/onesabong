@@ -18,8 +18,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return ($this->role_id == 1) ? true : false;
 	}
 
-	public function company(){
-		return $this->hasOne('\App\Company');
+	public function account(){
+		return $this->hasOne('\App\Account');
 	}
 	
 	public function role(){

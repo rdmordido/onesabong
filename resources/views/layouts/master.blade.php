@@ -36,7 +36,7 @@
 						<li><a href="{{ url('/') }}">Home</a></li>
 					
 					@if(!Auth::guest() && Auth::user()->is_admin)
-						<li><a href="{{ url('admin/company') }}">Company</a></li>
+						<li><a href="{{ url('admin/account') }}">Accounts</a></li>
 						<li><a href="{{ url('admin/user') }}">User</a></li>
 					@endif
 

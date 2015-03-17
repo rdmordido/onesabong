@@ -14,23 +14,30 @@
 							</ul>
 						</div>
 					@endif
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/company') }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/account') }}">
 				<div class="panel panel-default">
-					<div class="panel-heading">Company Information</div>
+					<div class="panel-heading">Account Information</div>
 					<div class="panel-body">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 							<div class="form-group">
-								<label class="col-md-4 control-label">Company Name</label>
+								<label class="col-md-4 control-label">Account Name</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" name="company_name" value="{{ old('company_name') }}">
+									<input type="text" class="form-control" name="name" value="{{ old('name') }}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Display Name</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="display_name" value="{{ old('display_name') }}">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="col-md-4 control-label">Description</label>
 								<div class="col-md-6">
-									<textarea class="form-control" name="company_description" value="{{ old('company_description') }}"></textarea>
+									<textarea class="form-control" name="description" value="{{ old('description') }}"></textarea>
 								</div>
 							</div>
 					</div>
@@ -40,9 +47,9 @@
 					<div class="panel-body">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-group">
-								<label class="col-md-4 control-label">Display Name</label>
+								<label class="col-md-4 control-label">Account Owner</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" name="display_name" value="{{ old('display_name') }}">
+									<input type="text" class="form-control" name="owner_name" value="{{ old('owner_name') }}">
 								</div>
 							</div>
 
